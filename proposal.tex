@@ -66,7 +66,9 @@
 %   Affiliation / Address line 3 \\
 %   \texttt{email@domain} \\}
 
-\author{{\bf Aditi Bodhankar}, {\bf Aditya Mantri Anulekh}, {\bf Advait Rane}, {\bf Nithyashree Manohar}, {\bf Surya Teja CVN}}
+\author{{\bf Aditi Bodhankar} \\ {\bf Aditya Anulekh Mantri} \\ {\bf Advait Rane} \\ {\bf Nithyashree Manohar} \\ {\bf Surya Teja CVN} \\ \{bodhanka, adityaan, aprane, nithyash, suryatej\}@usc.edu} 
+
+
 
 \begin{document}
 \maketitle
@@ -78,7 +80,7 @@ Pre-trained deep learning models encode harmful social biases which can have uni
 
 MABEL describes an intermediate pre-training step to reduce gender bias in language representations. They use Natural Language Inference (NLI) as a pre-training task and augment the dataset to contain samples of the same sentence but with opposite genders. For example, if the sentence, "Woman putting together a wooden shelf" is present in the dataset, they add a new sentence, "Man putting together a wooden shelf". The paper restricts itself to the binary gender. 
 
-The model is trained on the NLI task along with an alignment loss, to minimize the distance between original sentences and their augmented counterparts, and a contrastive loss, based on entailment of inference pairs. They then evaluate the model using intrinsic and extrinsic fairness metrics.
+The model is trained on the NLI task along with an alignment loss, to minimize the distance between original sentences and their augmented counterparts, and a contrastive loss, based on entailment of inference pairs. They then evaluate the model using intrinsic and extrinsic fairness metrics. 
 
 The goals for this project are-
 \begin{enumerate}
@@ -102,17 +104,19 @@ Mitigating bias in NLP can be divided into two broad categories - task-specific 
 
 \subsection{Evaluating Bias in NLP}
 
+Evaluating Bias in NLP models is as critical as identifying and mitigating bias. There are two types of bias evaluation - \textit{intrinsic} and \textit{extrinsic} evaluation \cite{he2022mabel}. Intrinsic evaluation methods directly probe the language model by either measuring the geometry of the embedding space or through likelihood scoring. Extrinsic methods on the other hand evaluate bias in models by using the model's predictions on a large population of downstream tasks. 
 
+Although intrinsic evaluation metrics are opaque they are popular in contemporary works due to their ease of computation. As compared to intrinsic methods, extrinsic methods are much more compute-intensive and time-consuming. However, extrinsic methods are interpretable and are known to better identify bias in language models and flag social harm. 
 
 
 
 \section{Datasets}
 
-We intend to follow the MABEL paper where the experiments are performed on two renowned NLI datasets, which are, Stanford Natural Language Inference (SNLI) \cite{SNLI_dataset_paper} and the Multi-Genre Natural Language Inference (MNLI) \cite{MNLI_dataset_paper}. The MNLI dataset is modeled on the SNLI corpus, which gives a range of genres of spoken and written text, and supports a distinctive cross-genre generalization evaluation. The two datasets are available at - \url{https://nlp.stanford.edu/projects/snli/} and \url{https://cims.nyu.edu/~sbowman/multinli/} respectively.
-We extract the sentence pairs with an entailment relationship as a pre-processing step. This basically is a hypothesis sentence that can be inferred to be true, based on a premise sentence. Since gender attribute is the prime focus, we extract all entailment pairs that contain at least one gendered term in either the premise or the hypothesis from an NLI dataset. For a sensitive attribute term in the sequence, swapping of a word is done along the opposite bias direction, that is, by changing "girl" to "boy" and the non-attribute words remain the same. This approach is followed for each sentence in every entailment pair. We also intend to perform few data cleaning activities that are suitable for the application.
+We intend to follow the MABEL paper where the experiments are performed on two renowned NLI datasets, which are, Stanford Natural Language Inference (SNLI) \cite{SNLI_dataset_paper} and the Multi-Genre Natural Language Inference (MNLI) \cite{MNLI_dataset_paper}. The MNLI dataset \footnote{\url{https://cims.nyu.edu/~sbowman/multinli/}} is modeled on the SNLI corpus \footnote{\url{https://nlp.stanford.edu/projects/snli/}}, which gives a range of genres of spoken and written text and supports a distinctive cross-genre generalization evaluation. 
+We extract the sentence pairs with an entailment relationship as a pre-processing step. This basically is a hypothesis sentence that can be inferred to be true, based on a premise sentence. Since gender attribute is the prime focus, we extract all entailment pairs that contain at least one gendered term in either the premise or the hypothesis from an NLI dataset. For a sensitive attribute term in the sequence, swapping of a word is done along the opposite bias direction, that is, by changing "girl" to "boy" and the non-attribute words remain the same. This approach is followed for each sentence in every entailment pair. We also intend to perform a few data-cleaning activities that are suitable for the application.
 
 \section{Technical Challenge}
-
+One of the main challenges in this work pertains to encoding social biases that are easily compounded in downstream tasks. We will be conducting a comparison of different techniques to evaluate extrinsic benchmarks, which might be slightly less time-efficient. Using a move closer under this similarity measurement. The paper uses 4x NVIDIA GeForce RTX 3090 GPUs for implementing MABEL. We might have to downgrade the computational needs, which can increase the training time. The paper also highlights a concern for the learning rate, $\alpha$, our goal is to optimize the learning rate to balance the trade-off between the fairer stereotype score and the language modeling ability. 
 
 
 \bibliography{custom}
