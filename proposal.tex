@@ -66,7 +66,7 @@
 %   Affiliation / Address line 3 \\
 %   \texttt{email@domain} \\}
 
-\author{Aditya Mantri Anulekh \\ {\bf Aditi Bodhankar} \\ {\bf Surya Teja CVN} \\ {\bf Nithyashree Manohar} \\ {\bf Advait Rane}}
+\author{{\bf Aditi Bodhankar}, {\bf Aditya Mantri Anulekh}, {\bf Advait Rane}, {\bf Nithyashree Manohar}, {\bf Surya Teja CVN}}
 
 \begin{document}
 \maketitle
@@ -89,16 +89,33 @@ The goals for this project are-
 
 \section{Related Work}
 
+\subsection{Bias in NLP} 
+
+Bias in Natural Language Processing is a pressing issue. Deep learning models are susceptible to bias because they are trained on large amounts of data that may contain implicit biases which leads the model to behave negatively towards unrepresented groups. Many deep learning models exhibit occupational gender stereotypes \cite{sun-etal-2019-mitigating}. Models predict “He is doctor” with a higher likelihood than “She is doctor.” Word embeddings encode relationships such that `man' is to `woman' as `computer programmer' is to `homemaker'. Translating “He is a nurse. She is a doctor” into Hungarian and back to English results in “She is a nurse. He is a doctor.” 
+
+There are other forms of bias prominent in deep learning models. Embeddings for `Black' is to `criminal' as `Caucasian' is to police. Similarly, `lawful' is to `Christianity' as `terrorist' is to `Islamic'. AI models are more likely to flag tweets written by African Americans as offensive \cite{manzini-etal-2019-black}. Research shows that multiple gender stereotypes occur in GPT-3 generated narratives, and can emerge even when prompts do not contain explicit gender cues or stereotype-related content \cite{lucy-bamman-2021-gender}.
+
+
+\subsection{Mitigating Bias in NLP}
+
+Mitigating bias in NLP can be divided into two broad categories - task-specific and task-agnostic debiasing \cite{he2022mabel}. In the first category, the model learns to discard the influence of sensitive attributes during downstream tasks. In the second category, the model mitigates bias by leveraging textual information from general corpora. For example, mitigating gender bias in NLP models, can involve computing a gender subspace representation and eliminating it from the encoded representations \cite{https://doi.org/10.48550/arxiv.1607.06520}. Some of the other methods involve re-training the encoder with higher dropout or equalizing objectives. In this work, we propose to explore task-agnostic methods to mitigate gender bias \cite{gira-etal-2022-debiasing}.
+
+\subsection{Evaluating Bias in NLP}
+
+
+
+
+
 \section{Datasets}
 
-We intend to follow the MABEL paper where the experiments are performed on two renowned NLI datasets, which are, Stanford Natural Language Inference (SNLI) \cite{SNLI_dataset_paper} and the Multi-Genre Natural Language Inference (MNLI) \cite{MNLI_dataset_paper}.
-As a pre-processing step, we extract the sentence pairs with an entailment relationship. This basically is a hypothesis sentence that can be inferred to be true, based on a premise sentence. Since gender attribute is the prime focus, we extract all entailment pairs that contain at least one gendered term in either the premise or the hypothesis from an NLI dataset. For a sensitive attribute term in the sequence, swapping of a word is done along the opposite bias direction, that is, by changing "girl" to "boy" and the non-attribute words remain the same. This approach is followed for each sentence in every entailment pair.
+We intend to follow the MABEL paper where the experiments are performed on two renowned NLI datasets, which are, Stanford Natural Language Inference (SNLI) \cite{SNLI_dataset_paper} and the Multi-Genre Natural Language Inference (MNLI) \cite{MNLI_dataset_paper}. The MNLI dataset is modeled on the SNLI corpus, which gives a range of genres of spoken and written text, and supports a distinctive cross-genre generalization evaluation. The two datasets are available at - \url{https://nlp.stanford.edu/projects/snli/} and \url{https://cims.nyu.edu/~sbowman/multinli/} respectively.
+We extract the sentence pairs with an entailment relationship as a pre-processing step. This basically is a hypothesis sentence that can be inferred to be true, based on a premise sentence. Since gender attribute is the prime focus, we extract all entailment pairs that contain at least one gendered term in either the premise or the hypothesis from an NLI dataset. For a sensitive attribute term in the sequence, swapping of a word is done along the opposite bias direction, that is, by changing "girl" to "boy" and the non-attribute words remain the same. This approach is followed for each sentence in every entailment pair. We also intend to perform few data cleaning activities that are suitable for the application.
 
 \section{Technical Challenge}
 
 
 
-\bibliography{anthology,custom}
+\bibliography{custom}
 \bibliographystyle{acl_natbib}
 
 \appendix
